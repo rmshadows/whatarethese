@@ -1,6 +1,6 @@
 ### 使用
 
- - Windows下直接运行即可。
+ - Windows下直接运行即可。中文乱码的话就是编码不一致，改成GBK就完事了。
  - 原理：就是用Windows自带的 `copy /b [InputFile]+[AttachedFile] [OutputFile]` 命令而已。生成指定大小填充物用的是 `fsutil file createnew [FilePath] [Size]`
  - 首先将需要扩增大小的文件重命名为“0”，扩展名保持不变。比如演示中使用的是一张jpg图片，首先重命名为“0.jpg”
 
