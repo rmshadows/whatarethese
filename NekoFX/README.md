@@ -11,7 +11,7 @@
      Neko在鼠标、屏幕边缘等会有不同动作(比如挖墙脚)。鼠标点击Neko，Neko会隐藏；
      点击‘喵-1’按钮，Neko也会消失(除非你用鼠标点击过Neko，要多点几下-1‘因为你用鼠标“踩”了Neko，Neko不乐意惹。’)
      
-     ！！如果想要关闭点击Neko消失这个功能，请打开Neko11包里面的Java文件，按我标记的地方注释掉就是！！
+     ！！ **如果想要关闭点击Neko消失这个功能，请打开Neko11包里面的Java文件，按我标记的地方注释掉就是** ！！
      
 3、点击‘咩+10’，屏幕会出现一只流浪羊，第一次点击仅会出现一只(=。=)。第二次点击会出现十只流浪小羊。
      点击‘咩=0’清除桌面所有小羊。记住，点一下，不要急，给电脑一点反应时间(电脑性能骚的略过==)。
@@ -23,32 +23,30 @@
      个包是内测包，我没法查看那源代码。我试了反编译，但编译出来的文件有权限，Neko.java无法访问(具体当然是没继续深究啦 0.0 )。
 
 二、感谢：
-     Neko是我在Linux系统上的Oneko项目得知的。我最初是想把Linux下C语言写的Oneko放到Windows下编译。我尝试了直接编译，借助Cygwin lib
+     Neko是我在Linux系统上的Oneko项目得知的。我最初是想把Linux下C语言写的 **Oneko** 放到Windows下编译。我尝试了直接编译，借助Cygwin lib
 但是，技艺不精，完全没接触过C的我略为茫然，于是我放弃了C代码移植这个想法。
-Oneko的Linux C源码在各大LinuxApt源都能下载到(例如：https://launchpad.net/ubuntu/+source/oneko/1.2.sakura.6-8 )。你可以通过apt获取：
-apt-get source oneko
+Oneko的Linux C源码在各大LinuxApt源都能下载到(例如 > https://launchpad.net/ubuntu/+source/oneko/1.2.sakura.6-8 )。你可以通过apt获取：
+`apt-get source oneko`
 Github上面当然也有，你可以：
-git clone https://github.com/tie/oneko.git
+`git clone https://github.com/tie/oneko.git`
 关于Neko移植Windows平台， 	我在
-https://amp.reddit.com/r/windows/comments/9o1sdc/have_anyone_successfully_get_neko_to_run_under/
-https://archive.codeplex.com/?p=neko98
+> https://amp.reddit.com/r/windows/comments/9o1sdc/have_anyone_successfully_get_neko_to_run_under/
+> https://archive.codeplex.com/?p=neko98
 					找到了答案。
-     关于Neko，国内有大哥用C#写了一个叫Candy的界面逼真。但动作有点‘惨不忍睹’（可能是我电脑问题？？太卡了？？PPT那种动作），于是我没有采用。
-但还是谢谢他给我的启发：https://github.com/SmileZXLee/Candy
-安卓当然也有Neko，叫做ANeko：
-https://github.com/lllllT/ANeko
+     关于Neko，国内有大哥用C#写了一个叫[Candy](https://github.com/SmileZXLee/Candy)的界面逼真精美。但动作有点‘惨不忍睹’（可能是我电脑问题？？太卡了？？PPT那种动作），于是我没有采用,但还是谢谢他给我的启发.
+安卓当然也有Neko，叫做[ANeko](https://github.com/lllllT/ANeko)
 接下来是我采用的Werner2010年在Chris Parent的基础上修改的版本：
-http://www.randelshofer.ch/blog/2010/07/screenmate-neko-in-java/
+> http://www.randelshofer.ch/blog/2010/07/screenmate-neko-in-java/
 但很遗憾，我没时间处理背景透明化问题，我只能尽量让Neko略微透明来减少视觉影响，但作用甚微。
 
-     关于eSheep流浪小羊(stray sheep) from 1995。他现在由Adrianotiger维护。他在Windows10 Store App(就是Microsoft Store啦)里可以下载到。
-他支持修改animations.xml改变动物，文末有初始文件。你也可以用在线编辑：
+     关于[eSheep](https://adrianotiger.github.io/desktopPet/)流浪小羊(stray sheep) from 1995。现在由Adrianotiger维护。他在Windows10 Store App(就是Microsoft Store啦)里可以下载到。
+他支持修改animations.xml改变动物， **文末有初始文件** 。你也可以用在线编辑：
 https://github.com/Adrianotiger/desktopPet/raw/master/Manual/Manual%20-%20online%20editor.docx
 项目的主页是：
-https://adrianotiger.github.io/desktopPet/
-http://esheep.petrucci.ch/
+> https://adrianotiger.github.io/desktopPet/
+> http://esheep.petrucci.ch/
 还有Web端：
-https://github.com/Adrianotiger/web-esheep
+> https://github.com/Adrianotiger/web-esheep
 
 -------------------------------------------------------------------------
 关于为什么只有Windows版本：
@@ -59,7 +57,7 @@ https://github.com/Adrianotiger/web-esheep
 不是很稳定，我知道不服的人很多，电脑3000块以上的
 就没必要发言了。我这4k的笔记本，在编写这个软件的过程
 中自然是被Windows刁难了好几次，就连现在写这个ReadMe
-文档就又被Gank了一次，倒不是什么大问题，但是很烦。
+文档就又被Gank了一次，倒不是什么大问题，但是很烦[对，系统维护不给力]。
 举个例子，删除文件跟你说正在使用。呵呵，又得去解除占用，服了。
 然后通过此次，我发现还是vi香哦，eclipse等等这些IDE就修改
 代码啥的香，最后还是vi啦，notepad(Windows记事本0.0)这些比较香。
@@ -75,7 +73,7 @@ https://github.com/Adrianotiger/web-esheep
 
 
 
-====================================================================================================================
+=========================================================================
 animations.xml
 
 <?xml version="1.0" encoding="utf-8"?>
