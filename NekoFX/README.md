@@ -5,48 +5,54 @@
 平台：Windows 1903
 时间：-2020-04-
 
-一、食用方法[没错，Pets就是要用食用]：
+### 编译与运行
+
+- 编译：`javac --module-path "%Your_JavaFX_Home%" --module-source-path src -d bin/ -m cn.rmshadows.NekoFX -encoding UTF-8`
+
+- 运行：`java -encoding=UTF-8 -p ".\bin\;%Your_JavaFX_Home%" -m cn.rmshadows.NekoFX/NekoFX.MainApp`
+
+- 打包：`jlink --launcher StartNekoFX=cn.rmshadows.NekoFX/NekoFX.MainApp --module-path "%Your_JavaFX_Jmods_Home%;.\bin\" --add-modules javafx.base,javafx.controls,javafx.fxml,java.base,java.desktop,javafx.graphics,cn.rmshadows.NekoFX --output cn.rmshadows.NekoFX`
+
+-  _注意：_ **[非常重要]** Jlink打包用的是Jmods模块。Javac编译完后记得把resources相应的资源文件拷贝过去，特别注意eSheep.exe的位置。Jlink打包后的也要自己将eSheep.exe移动到相应的目录下！ **[非常重要]** [具体那个目录见源代码，还有，修改了eSheep打开位置的，记得修改Sheep+10方法里初始化文件修改地址！！]
+
+### 一、食用方法[没错，Pets就是要用食用]：
+
+
 1、解压后直接打开点我启动-NekoFX ClickMe_to_RunNekoFX.vbs运行。
-2、点击‘喵+1’可以在桌面增加一只可爱滴小喵咪(Neko)。Neko会追逐鼠标，再点击一下‘喵+1’可以再增加一只Neko。
-     Neko在鼠标、屏幕边缘等会有不同动作(比如挖墙脚)。鼠标点击Neko，Neko会隐藏；
-     点击‘喵-1’按钮，Neko也会消失(除非你用鼠标点击过Neko，要多点几下-1‘因为你用鼠标“踩”了Neko，Neko不乐意惹。’)
+
+2、点击‘喵+1’可以在桌面增加一只可爱滴小喵咪(Neko)。Neko会追逐鼠标，再点击一下‘喵+1’可以再增加一只Neko。Neko在鼠标、屏幕边缘等会有不同动作(比如挖墙脚)。鼠标点击Neko，Neko会隐藏；点击‘喵-1’按钮，Neko也会消失(除非你用鼠标点击过Neko，要多点几下-1‘因为你用鼠标“踩”了Neko，Neko不乐意惹。’)
      
      ！！ **如果想要关闭点击Neko消失这个功能，请打开Neko11包里面的Java文件，按我标记的地方注释掉就是** ！！
      
-3、点击‘咩+10’，屏幕会出现一只流浪羊，第一次点击仅会出现一只(=。=)。第二次点击会出现十只流浪小羊。
-     点击‘咩=0’清除桌面所有小羊。记住，点一下，不要急，给电脑一点反应时间(电脑性能骚的略过==)。
-4、想必如果你在阅读此ReadMe之前成功运行过NekoFX，你应该知道点击关闭按钮并不会直接退出程序。程序默认隐藏在系统托盘(我相信是个正常的
-     Windows系统，用户一般不会吧任务栏搞掉吧…？即使是Linux，你也有Tint2(应该是这个名字吧我猜。。)这种轻量级任务栏可以使用(反正我是不用，快乐清爽Gnome从我做起)。)
-     右击系统托盘，可以显示主界面和退出[-别问我为什么是英文，因为一开始我也用的中文，但AWT这个SystemTray会乱码唉，作为一个懒惰的业余的
-     程序猿我选择偷懒啦 / =。=*/]。
-5、关于Neko背景不透明的原因：因为是Java11环境，原本背景处理用的是Java8的AWT-Utilities包里面的AWTUtilities.setWindowOpacity方法。但是这
-     个包是内测包，我没法查看那源代码。我试了反编译，但编译出来的文件有权限，Neko.java无法访问(具体当然是没继续深究啦 0.0 )。
+3、点击‘咩+10’，屏幕会出现一只流浪羊，第一次点击仅会出现一只(=。=)。第二次点击会出现十只流浪小羊。点击‘咩=0’清除桌面所有小羊。记住，点一下，不要急，给电脑一点反应时间(电脑性能骚的略过==)。
 
-二、感谢：
-     Neko是我在Linux系统上的Oneko项目得知的。我最初是想把Linux下C语言写的 **Oneko** 放到Windows下编译。我尝试了直接编译，借助Cygwin lib
-但是，技艺不精，完全没接触过C的我略为茫然，于是我放弃了C代码移植这个想法。
-Oneko的Linux C源码在各大LinuxApt源都能下载到(例如 > https://launchpad.net/ubuntu/+source/oneko/1.2.sakura.6-8 )。你可以通过apt获取：
+4、想必如果你在阅读此ReadMe之前成功运行过NekoFX，你应该知道点击关闭按钮并不会直接退出程序。程序默认隐藏在系统托盘(我相信是个正常的Windows系统，用户一般不会吧任务栏搞掉吧…？即使是Linux，你也有Tint2(应该是这个名字吧我猜。。)这种轻量级任务栏可以使用(反正我是不用，快乐清爽Gnome从我做起)。)右击系统托盘，可以显示主界面和退出[-别问我为什么是英文，因为一开始我也用的中文，但AWT这个SystemTray会乱码唉，作为一个懒惰的业余的程序猿我选择偷懒啦 / =。=*/]。
+
+5、关于Neko背景不透明的原因：因为是Java11环境，原本背景处理用的是Java8的AWT-Utilities包里面的AWTUtilities.setWindowOpacity方法。但是这个包是内测包，我没法查看那源代码。我试了反编译，但编译出来的文件有权限，Neko.java无法访问(具体当然是没继续深究啦 0.0 )。
+
+### 二、致谢：
+
+     Neko是我在Linux系统上的Oneko项目得知的。我最初是想把Linux下C语言写的 **Oneko** 放到Windows下编译。我尝试了直接编译，借助Cygwin lib但是，技艺不精，完全没接触过C的我略为茫然，于是我放弃了C代码移植这个想法。Oneko的Linux C源码在各大LinuxApt源都能下载到(例如 > https://launchpad.net/ubuntu/+source/oneko/1.2.sakura.6-8 )。你可以通过apt获取：
+
 `apt-get source oneko`
+
 Github上面当然也有，你可以：
+
 `git clone https://github.com/tie/oneko.git`
+
 关于Neko移植Windows平台， 	我在
 > https://amp.reddit.com/r/windows/comments/9o1sdc/have_anyone_successfully_get_neko_to_run_under/
 > https://archive.codeplex.com/?p=neko98
-					找到了答案。
-     关于Neko，国内有大哥用C#写了一个叫[Candy](https://github.com/SmileZXLee/Candy)的界面逼真精美。但动作有点‘惨不忍睹’（可能是我电脑问题？？太卡了？？PPT那种动作），于是我没有采用,但还是谢谢他给我的启发.
-安卓当然也有Neko，叫做[ANeko](https://github.com/lllllT/ANeko)
-接下来是我采用的Werner2010年在Chris Parent的基础上修改的版本：
-> http://www.randelshofer.ch/blog/2010/07/screenmate-neko-in-java/
-但很遗憾，我没时间处理背景透明化问题，我只能尽量让Neko略微透明来减少视觉影响，但作用甚微。
+找到了答案。
+     
+关于Neko，国内有大哥用C#写了一个叫[Candy](https://github.com/SmileZXLee/Candy)的界面逼真精美。但动作有点‘惨不忍睹’（可能是我电脑问题？？太卡了？？PPT那种动作），于是我没有采用,但还是谢谢他给我的启发.安卓当然也有Neko，叫做[ANeko](https://github.com/lllllT/ANeko)接下来是我采用的Werner2010年在Chris Parent的基础上修改的版本：> http://www.randelshofer.ch/blog/2010/07/screenmate-neko-in-java/但很遗憾，我没时间处理背景透明化问题，我只能尽量让Neko略微透明来减少视觉影响，但作用甚微。
 
-     关于[eSheep](https://adrianotiger.github.io/desktopPet/)流浪小羊(stray sheep) from 1995。现在由Adrianotiger维护。他在Windows10 Store App(就是Microsoft Store啦)里可以下载到。
+关于[eSheep](https://adrianotiger.github.io/desktopPet/) 流浪小羊(stray sheep) from 1995。现在由Adrianotiger维护。他在Windows10 Store App(就是Microsoft Store啦)里可以下载到。
 他支持修改animations.xml改变动物， **文末有初始文件** 。你也可以用在线编辑：
 https://github.com/Adrianotiger/desktopPet/raw/master/Manual/Manual%20-%20online%20editor.docx
-项目的主页是：
-> https://adrianotiger.github.io/desktopPet/
+项目的主页是：> https://adrianotiger.github.io/desktopPet/
 > http://esheep.petrucci.ch/
-还有Web端：
-> https://github.com/Adrianotiger/web-esheep
+还有Web端：> https://github.com/Adrianotiger/web-esheep
 
 -------------------------------------------------------------------------
 关于为什么只有Windows版本：
@@ -65,6 +71,10 @@ https://github.com/Adrianotiger/desktopPet/raw/master/Manual/Manual%20-%20online
 
 就酱啦，最后祝大家生活愉快~
 -------------------------------------------------------------------------
+
+### 截屏
+
+
 
 
 
