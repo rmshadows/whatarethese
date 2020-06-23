@@ -54,6 +54,8 @@ https://github.com/Adrianotiger/desktopPet/raw/master/Manual/Manual%20-%20online
 > http://esheep.petrucci.ch/
 还有Web端：> https://github.com/Adrianotiger/web-esheep
 
+类似的项目：PPet > https://github.com/zenghongtu/PPet
+
 -------------------------------------------------------------------------
 关于为什么只有Windows版本：
 
