@@ -45,7 +45,7 @@ Github上面当然也有，你可以：
 > https://archive.codeplex.com/?p=neko98
 找到了答案。
      
-关于Neko，国内有大哥用C#写了一个叫[Candy](https://github.com/SmileZXLee/Candy)的界面逼真精美。但动作有点‘惨不忍睹’（可能是我电脑问题？？太卡了？？PPT那种动作），于是我没有采用,但还是谢谢他给我的启发.安卓当然也有Neko，叫做[ANeko](https://github.com/lllllT/ANeko)接下来是我采用的Werner2010年在Chris Parent的基础上修改的版本：> http://www.randelshofer.ch/blog/2010/07/screenmate-neko-in-java/但很遗憾，我没时间处理背景透明化问题，我只能尽量让Neko略微透明来减少视觉影响，但作用甚微。
+关于Neko，国内有大哥用C#写了一个叫[Candy](https://github.com/SmileZXLee/Candy)的界面逼真精美。但动作有点‘惨不忍睹’（可能是我电脑问题？？太卡了？？PPT那种动作），于是我没有采用,但还是谢谢他给我的启发.安卓当然也有Neko，叫做[ANeko](https://github.com/lllllT/ANeko)接下来是我采用的Werner2010年在Chris Parent的基础上修改的版本：> http://www.randelshofer.ch/blog/2010/07/screenmate-neko-in-java/  但很遗憾，我没时间处理背景透明化问题，我只能尽量让Neko略微透明来减少视觉影响，但作用甚微。 
 
 关于[eSheep](https://adrianotiger.github.io/desktopPet/) 流浪小羊(stray sheep) from 1995。现在由Adrianotiger维护。他在Windows10 Store App(就是Microsoft Store啦)里可以下载到。
 他支持修改animations.xml改变动物， **文末有初始文件** 。你也可以用在线编辑：
