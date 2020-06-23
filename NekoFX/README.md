@@ -74,14 +74,9 @@ https://github.com/Adrianotiger/desktopPet/raw/master/Manual/Manual%20-%20online
 
 ### 截屏
 
-
-
-
-
-
-
-
-
+![主界面](https://images.gitee.com/uploads/images/2020/0623/121904_67770d73_7423713.png "屏幕截图.png")
+![Neko](https://images.gitee.com/uploads/images/2020/0623/121928_b08d1ab9_7423713.png "屏幕截图.png")
+![eSheep](https://images.gitee.com/uploads/images/2020/0623/122017_8615766f_7423713.png "屏幕截图.png")
 
 =========================================================================
 animations.xml
