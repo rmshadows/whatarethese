@@ -200,10 +200,12 @@ if __name__ == '__main__':
 		file_handle.write(CHANGE_LIST_B.replace("\n",",\n"))
 		file_handle.close()
 		ACTION=True
-		file_info_main = getEachFilePath(DIRECTORY)
+		for dir in DIRECTORY:
+			file_info_main = getEachFilePath(dir)
 		recognizeDuplicateSignal(file_info_main,IDENTIFY)
 		time.sleep(3)
-		file_info_main = getEachFilePath(DIRECTORY)
+		for dir in DIRECTORY:
+			file_info_main = getEachFilePath(dir)
 		fileWithTheSameSize(file_info_main)
 	else:
 		pass
