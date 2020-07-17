@@ -167,12 +167,14 @@ if __name__ == '__main__':
 		pass
 	else:
 		mkdir(".{}IDN_DEL".format(sep))
+file_info_main = []
 	for dir in DIRECTORY:
-		file_info_main = getEachFilePath(dir)
+		file_info_main.extend(getEachFilePath(dir))
 	recognizeDuplicateSignal(file_info_main,IDENTIFY)
 	time.sleep(3)
+	file_info_main = []
 	for dir in DIRECTORY:
-		file_info_main = getEachFilePath(dir)
+		file_info_main.extend(getEachFilePath(dir))
 	fileWithTheSameSize(file_info_main)
 	if WINDOWS:
 		print("\n找到重复标志的文件：")
@@ -200,12 +202,28 @@ if __name__ == '__main__':
 		file_handle.write(CHANGE_LIST_B.replace("\n",",\n"))
 		file_handle.close()
 		ACTION=True
+		file_info_main = []
 		for dir in DIRECTORY:
-			file_info_main = getEachFilePath(dir)
+			file_info_main.extend(getEachFilePath(dir))
 		recognizeDuplicateSignal(file_info_main,IDENTIFY)
 		time.sleep(3)
+		file_info_main = []
 		for dir in DIRECTORY:
-			file_info_main = getEachFilePath(dir)
+			file_info_main.extend(getEachFilePath(dir))
 		fileWithTheSameSize(file_info_main)
 	else:
 		pass
+	if WINDOWS:
+		print("\n找到重复标志的文件：")
+		WindowsColoredCommandLine.printColor(4,CHANGE_LIST_A)
+		print("\n找到大小一致的文件：")
+		WindowsColoredCommandLine.printColor(5,CHANGE_LIST_B)
+		print("\n错误日志：")
+		WindowsColoredCommandLine.printColor(6,ERROR_REPORT)
+	else:
+		print("\n找到重复标志的文件：")
+		print("\033[1;32;41m{0}\033[0m".format(CHANGE_LIST_A))
+		print("\n找到大小一致的文件：")
+		print("\033[1;33;41m{0}\033[0m".format(CHANGE_LIST_B))
+		print("\n错误日志：")
+		print("\033[1;31;41m{0}\033[0m".format(ERROR_REPORT))
