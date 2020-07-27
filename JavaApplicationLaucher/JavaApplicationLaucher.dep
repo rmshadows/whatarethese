@@ -1,0 +1,9 @@
+# Microsoft Developer Studio Generated Dependency File, included by JavaApplicationLaucher.mak
+
+.\JavaApplicationLaucher.cpp : \
+	"..\..\programs\microsoft visual studio\vc98\include\basetsd.h"\
+	
+
+.\StdAfx.cpp : \
+	".\StdAfx.h"\
+	
