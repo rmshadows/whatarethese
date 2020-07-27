@@ -3,6 +3,7 @@
 | **名称** | **语言** | **平台** | **版本** | **描述** |
 |---|---|---|---|---|
 |[一键关机.exe](https://gitee.com/rmshadows/shenmedongxi/attach_files/419476/download)|C++|Windows|v1.0|用来一键关机吖。。。。懒得从开始菜单关机(笔记本键盘太小我拒绝用alt+F4)|
+|[JavaApplicationLauncher](https://gitee.com/rmshadows/shenmedongxi/releases/JavaApplicationLauncher_v1.0)|C++|Windows|v1.0|用于加载我用Jlink打包的Java或JavaFX桌面应用，其实就是执行CMD命令而已|
 |一键关机.vbs|VBScript|Windows|v1.0|一键关机的VBS脚本|
 |MyJavaFXApplicationLauncher.vbs|VBScript|Windows|v1.0|用来加载Windows下Jlink包装的JFX应用|
 |文件大小扩增.vbs|VBScript|Windows|v1.0|用Windows下的Copy /b命令将无用数据填充进文件，使文件“虚胖”|
