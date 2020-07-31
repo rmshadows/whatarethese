@@ -9,13 +9,17 @@ import sys
 
 #要检查是否有重复的目录,文件名中不可有“>”！！
 
-DIRECTORY = []
-IDENTIFY = None
+DIRECTORY = [".\\音乐库bak"]
+IDENTIFY = ["(1)","(2)","(3)","(4)","副本"]
 
 ACTION = False
+TEMP_CHANGE_LIST_A = ""
+TEMP_CHANGE_LIST_B = ""
 CHANGE_LIST_A = ""
 CHANGE_LIST_B = ""
+TEMP_ERROR_REPORT = ""
 ERROR_REPORT = ""
+
 WINDOWS = (sep=="\\")
 
 def get_args():
@@ -37,13 +41,13 @@ def get_args():
 #获取文件大小、路径。返回列表元素：%文件名%>%大小%>%路径%
 def getEachFilePath(path):
 	global ACTION
-	global ERROR_REPORT
+	global TEMP_ERROR_REPORT
 	FILE_INFO = []
 	contents_list = listdir(path)
 	for content in contents_list:
 		if ">" in content:
 			print("非法文件名包含“>”")
-			ERROR_REPORT = ERROR_REPORT+"\ngetEachFilePath(path)在处理{}时发生了错误。[0]".format(str(join(path,content)))
+			TEMP_ERROR_REPORT = TEMP_ERROR_REPORT+"\ngetEachFilePath(path)在处理{}时发生了错误。[0]".format(str(join(path,content)))
 		elif isdir(join(path,content)):
 			file_list = getEachFilePath(join(path,content))
 			FILE_INFO.extend(file_list)
@@ -52,12 +56,12 @@ def getEachFilePath(path):
 			info = "{}>{}>{}".format(str(content),str(getsize(file_path)),str(file_path))
 			FILE_INFO.append(info)
 		else:
-			ERROR_REPORT = ERROR_REPORT+"\ngetEachFilePath(path)在处理{}时发生了错误:{}".format(str(join(contents_list,content),e))
+			TEMP_ERROR_REPORT = TEMP_ERROR_REPORT+"\ngetEachFilePath(path)在处理{}时发生了错误:{}".format(str(join(contents_list,content),e))
 			print("未知文件系统")
 	if (not ACTION):
 		# print("获取到的文件信息有：")
 		for x in FILE_INFO:
-			print("输出文件信息："+x)
+			#print("输出文件信息："+x)
 			pass
 	return FILE_INFO
 
@@ -68,20 +72,22 @@ def __mkdir(which_path,single_file_info):
 	pathLen = len(pathSplit)
 	for x in range(1,pathLen-1):
 		if(exists(join(which_path,pathSplit[x]))):
-			print("Folder existed.")
+			#print("Folder existed.")
+			pass
 		else:
 			if ACTION:
 				mkdir(join(which_path,pathSplit[x]))
 			else:
-				print("mkdir将创建文件夹："+str(join(which_path,pathSplit[x])))
+				#print("mkdir将创建文件夹："+str(join(which_path,pathSplit[x])))
+				pass
 		which_path = join(which_path,pathSplit[x])
-	print("mkdir has done.")
+	#print("mkdir has done.")
 
 
 #如果识别出文件名带有重复标识的，移动到IDENTIFY文件夹
 def recognizeDuplicateSignal(file_info_list , identify_list):
 	global ACTION
-	global CHANGE_LIST_A
+	global TEMP_CHANGE_LIST_A
 	Signal = False
 	if identify_list==None:
 		print("未定义重复识别符号")
@@ -95,20 +101,21 @@ def recognizeDuplicateSignal(file_info_list , identify_list):
 					print("在{}文件名中发现标记{}".format(info,each))
 					src = file_path
 					dst = file_path.replace(".{}".format(sep),".{0}FILE_IDENTIFY{0}".format(sep))
+					print(dst)
 					try:
 						__mkdir(".{}FILE_IDENTIFY".format(sep),info)
 						if ACTION:
 							shutil.move(src,dst)
-						CHANGE_LIST_A = CHANGE_LIST_A + "文件{}移动到{}\n".format(src,dst)
+						TEMP_CHANGE_LIST_A = TEMP_CHANGE_LIST_A + "文件{}         ▇▇移动到▇▇          {}\n".format(src,dst)
 					except Exception as e:
 						print("recognizeDuplicateSignal(file_info_list , identify_list)文件移动出错。")
-						ERROR_REPORT = ERROR_REPORT+"\nrecognizeDuplicateSignal(file_info_list , identify_list)在处理{}时发生了错误:{}".format(file_path,e)
+						TEMP_ERROR_REPORT = TEMP_ERROR_REPORT+"\nrecognizeDuplicateSignal(file_info_list , identify_list)在处理{}时发生了错误:{}".format(file_path,e)
 	return Signal
 
 def fileWithTheSameSize(file_info_list):
 	global ACTION
-	global CHANGE_LIST_B
-	global ERROR_REPORT
+	global TEMP_CHANGE_LIST_B
+	global TEMP_ERROR_REPORT
 	file_duplicate = []
 	file_list_part = file_info_list
 	for each_info in file_info_list:
@@ -142,15 +149,34 @@ def fileWithTheSameSize(file_info_list):
 				else:
 					__mkdir(".{0}FILE_PICK_UP_HERE".format(sep),dup)
 					print("大小一致：移动文件从{}到{}。".format(src,dst))
-				CHANGE_LIST_B = CHANGE_LIST_B + "文件{}    移动到    {}    Size:{}\n".format(src,dst,dup.split(">")[1])
+				TEMP_CHANGE_LIST_B = TEMP_CHANGE_LIST_B + "文件{}          ▇▇移动到▇▇          {}---------Size:{}\n".format(src,dst,dup.split(">")[1])
 			except Exception as e:
 				# raise e
-				ERROR_REPORT = ERROR_REPORT+"\nfileWithTheSameSize(file_info_list)在处理{}时发生了错误:{}".format(dup,e)
+				TEMP_ERROR_REPORT = TEMP_ERROR_REPORT+"\nfileWithTheSameSize(file_info_list)在处理{}时发生了错误:{}".format(dup,e)
 	else:
 		print("没有大小相同的文件")
 
+def showInfo():
+	if WINDOWS:
+		print("\n找到重复标志的文件：")
+		WindowsColoredCommandLine.printColor(4,TEMP_CHANGE_LIST_A)
+		print("\n找到大小一致的文件：")
+		WindowsColoredCommandLine.printColor(5,TEMP_CHANGE_LIST_B)
+		print("\n错误日志：")
+		WindowsColoredCommandLine.printColor(6,TEMP_ERROR_REPORT)
+	else:
+		print("\n找到重复标志的文件：")
+		print("\033[1;32;41m{0}\033[0m".format(TEMP_CHANGE_LIST_A))
+		print("\n找到大小一致的文件：")
+		print("\033[1;33;41m{0}\033[0m".format(TEMP_CHANGE_LIST_B))
+		print("\n错误日志：")
+		print("\033[1;31;41m{0}\033[0m".format(TEMP_ERROR_REPORT))
+
 if __name__ == '__main__':
-	get_args()
+	CSV = ""
+	# print("TEMP:"+TEMP_CHANGE_LIST_A,TEMP_CHANGE_LIST_B,TEMP_ERROR_REPORT)
+	if ((DIRECTORY == None) | (IDENTIFY == None)):
+		get_args()
 	print(DIRECTORY,IDENTIFY)
 	if exists((".{}FILE_PICK_UP_HERE".format(sep))):
 		# shutil.rmtree(".{}FILE_PICK_UP_HERE".format(sep))
@@ -167,7 +193,7 @@ if __name__ == '__main__':
 		pass
 	else:
 		mkdir(".{}IDN_DEL".format(sep))
-file_info_main = []
+	file_info_main = []
 	for dir in DIRECTORY:
 		file_info_main.extend(getEachFilePath(dir))
 	recognizeDuplicateSignal(file_info_main,IDENTIFY)
@@ -176,31 +202,20 @@ file_info_main = []
 	for dir in DIRECTORY:
 		file_info_main.extend(getEachFilePath(dir))
 	fileWithTheSameSize(file_info_main)
-	if WINDOWS:
-		print("\n找到重复标志的文件：")
-		WindowsColoredCommandLine.printColor(4,CHANGE_LIST_A)
-		print("\n找到大小一致的文件：")
-		WindowsColoredCommandLine.printColor(5,CHANGE_LIST_B)
-		print("\n错误日志：")
-		WindowsColoredCommandLine.printColor(6,ERROR_REPORT)
-	else:
-		print("\n找到重复标志的文件：")
-		print("\033[1;32;41m{0}\033[0m".format(CHANGE_LIST_A))
-		print("\n找到大小一致的文件：")
-		print("\033[1;33;41m{0}\033[0m".format(CHANGE_LIST_B))
-		print("\n错误日志：")
-		print("\033[1;31;41m{0}\033[0m".format(ERROR_REPORT))
-
-	# print(CHANGE_LIST_B.replace("\n","\n,"))
+	showInfo()
+	# print(TEMP_CHANGE_LIST_B.replace("\n","\n,"))
 
 	x = input("是否执行？(y/N)")
 	if x in ["Y","y"]:
-		file_handle=open('./A.csv',mode='w')
-		file_handle.write(CHANGE_LIST_A.replace("\n",",\n"))
-		file_handle.close()
-		file_handle=open('./B.csv',mode='w')
-		file_handle.write(CHANGE_LIST_B.replace("\n",",\n"))
-		file_handle.close()
+		try:
+			file_handle=open('./A.csv',mode='w')
+			file_handle.write(TEMP_CHANGE_LIST_A.replace("\n",",\n"))
+			file_handle.close()
+			file_handle=open('./B.csv',mode='w')
+			file_handle.write(TEMP_CHANGE_LIST_B.replace("\n",",\n"))
+			file_handle.close()
+		except Exception as e:
+			CSV = CSV + "\n{}".format(e)
 		ACTION=True
 		file_info_main = []
 		for dir in DIRECTORY:
@@ -211,19 +226,38 @@ file_info_main = []
 		for dir in DIRECTORY:
 			file_info_main.extend(getEachFilePath(dir))
 		fileWithTheSameSize(file_info_main)
+		showInfo()
+		n = 1
+		while ((TEMP_CHANGE_LIST_A.replace("\n","") == "") & (TEMP_CHANGE_LIST_B.replace("\n","") == "")):
+			print("重复查询   "+str(n)+"   次。")
+			n = n + 1
+			CHANGE_LIST_A = CHANGE_LIST_A + TEMP_CHANGE_LIST_A
+			CHANGE_LIST_B = CHANGE_LIST_B + TEMP_CHANGE_LIST_B
+			ERROR_REPORT = ERROR_REPORT + TEMP_ERROR_REPORT
+			TEMP_CHANGE_LIST_A = ""
+			TEMP_CHANGE_LIST_B = ""
+			TEMP_ERROR_REPORT = ""
+			try:
+				file_handle=open('./A.csv',mode='w')
+				file_handle.write(TEMP_CHANGE_LIST_A.replace("\n",",\n"))
+				file_handle.close()
+				file_handle=open('./B.csv',mode='w')
+				file_handle.write(TEMP_CHANGE_LIST_B.replace("\n",",\n"))
+				file_handle.close()
+			except Exception as e:
+				CSV = CSV + "\n{}".format(e)
+			ACTION=True
+			file_info_main = []
+			for dir in DIRECTORY:
+				file_info_main.extend(getEachFilePath(dir))
+			recognizeDuplicateSignal(file_info_main,IDENTIFY)
+			time.sleep(3)
+			file_info_main = []
+			for dir in DIRECTORY:
+				file_info_main.extend(getEachFilePath(dir))
+			fileWithTheSameSize(file_info_main)
+			showInfo()
+		print("执行退出")
+		print("CSV_ERROR:"+CSV)
 	else:
-		pass
-	if WINDOWS:
-		print("\n找到重复标志的文件：")
-		WindowsColoredCommandLine.printColor(4,CHANGE_LIST_A)
-		print("\n找到大小一致的文件：")
-		WindowsColoredCommandLine.printColor(5,CHANGE_LIST_B)
-		print("\n错误日志：")
-		WindowsColoredCommandLine.printColor(6,ERROR_REPORT)
-	else:
-		print("\n找到重复标志的文件：")
-		print("\033[1;32;41m{0}\033[0m".format(CHANGE_LIST_A))
-		print("\n找到大小一致的文件：")
-		print("\033[1;33;41m{0}\033[0m".format(CHANGE_LIST_B))
-		print("\n错误日志：")
-		print("\033[1;31;41m{0}\033[0m".format(ERROR_REPORT))
+		print("不执行，退出")
