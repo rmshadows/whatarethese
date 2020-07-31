@@ -9,8 +9,8 @@ import sys
 
 #要检查是否有重复的目录,文件名中不可有“>”！！
 
-DIRECTORY = [".\\音乐库bak"]
-IDENTIFY = ["(1)","(2)","(3)","(4)","副本"]
+DIRECTORY = None
+IDENTIFY = None
 
 ACTION = False
 TEMP_CHANGE_LIST_A = ""
@@ -173,7 +173,7 @@ def showInfo():
 		print("\033[1;31;41m{0}\033[0m".format(TEMP_ERROR_REPORT))
 
 if __name__ == '__main__':
-	CSV = ""
+	CSV_ERROR = ""
 	# print("TEMP:"+TEMP_CHANGE_LIST_A,TEMP_CHANGE_LIST_B,TEMP_ERROR_REPORT)
 	if ((DIRECTORY == None) | (IDENTIFY == None)):
 		get_args()
@@ -207,15 +207,15 @@ if __name__ == '__main__':
 
 	x = input("是否执行？(y/N)")
 	if x in ["Y","y"]:
-		try:
-			file_handle=open('./A.csv',mode='w')
-			file_handle.write(TEMP_CHANGE_LIST_A.replace("\n",",\n"))
-			file_handle.close()
-			file_handle=open('./B.csv',mode='w')
-			file_handle.write(TEMP_CHANGE_LIST_B.replace("\n",",\n"))
-			file_handle.close()
-		except Exception as e:
-			CSV = CSV + "\n{}".format(e)
+		# try:
+		# 	file_handle=open('./A.csv',mode='w')
+		# 	file_handle.write(TEMP_CHANGE_LIST_A.replace("\n",",\n"))
+		# 	file_handle.close()
+		# 	file_handle=open('./B.csv',mode='w')
+		# 	file_handle.write(TEMP_CHANGE_LIST_B.replace("\n",",\n"))
+		# 	file_handle.close()
+		# except Exception as e:
+		# 	CSV_ERROR = CSV_ERROR + "\n{}".format(e)
 		ACTION=True
 		file_info_main = []
 		for dir in DIRECTORY:
@@ -228,7 +228,12 @@ if __name__ == '__main__':
 		fileWithTheSameSize(file_info_main)
 		showInfo()
 		n = 1
-		while ((TEMP_CHANGE_LIST_A.replace("\n","") == "") & (TEMP_CHANGE_LIST_B.replace("\n","") == "")):
+		CHANGE_LIST_A = CHANGE_LIST_A + TEMP_CHANGE_LIST_A
+		CHANGE_LIST_B = CHANGE_LIST_B + TEMP_CHANGE_LIST_B
+		ERROR_REPORT = ERROR_REPORT + TEMP_ERROR_REPORT
+		while ((TEMP_CHANGE_LIST_A != "") | (TEMP_CHANGE_LIST_B != "")):
+			print("进入While循环")
+			#print("%%{}%%{}%%".format(TEMP_CHANGE_LIST_A,TEMP_CHANGE_LIST_B))
 			print("重复查询   "+str(n)+"   次。")
 			n = n + 1
 			CHANGE_LIST_A = CHANGE_LIST_A + TEMP_CHANGE_LIST_A
@@ -237,15 +242,6 @@ if __name__ == '__main__':
 			TEMP_CHANGE_LIST_A = ""
 			TEMP_CHANGE_LIST_B = ""
 			TEMP_ERROR_REPORT = ""
-			try:
-				file_handle=open('./A.csv',mode='w')
-				file_handle.write(TEMP_CHANGE_LIST_A.replace("\n",",\n"))
-				file_handle.close()
-				file_handle=open('./B.csv',mode='w')
-				file_handle.write(TEMP_CHANGE_LIST_B.replace("\n",",\n"))
-				file_handle.close()
-			except Exception as e:
-				CSV = CSV + "\n{}".format(e)
 			ACTION=True
 			file_info_main = []
 			for dir in DIRECTORY:
@@ -258,6 +254,50 @@ if __name__ == '__main__':
 			fileWithTheSameSize(file_info_main)
 			showInfo()
 		print("执行退出")
-		print("CSV_ERROR:"+CSV)
+		try:
+			file_handle=open('./A.csv',mode='w')
+			file_handle.write(CHANGE_LIST_A.replace("\n",",\n"))
+			file_handle.close()
+			file_handle=open('./B.csv',mode='w')
+			file_handle.write(CHANGE_LIST_B.replace("\n",",\n"))
+			file_handle.close()
+		except Exception as e:
+			CSV_ERROR = CSV_ERROR + "\n{}".format(e)
 	else:
 		print("不执行，退出")
+
+	WindowsColoredCommandLine.printColor(6,"▇▇▇▇▇▇▇▇▇▇▇▇最终运行结果：▇▇▇▇▇▇▇▇▇▇▇▇▇\n\n")
+	if WINDOWS:
+		if CHANGE_LIST_A == "":
+			WindowsColoredCommandLine.printColor(4,"▇▇▇▇▇▇▇▇▇▇▇▇没有找到带有重复标志的文件▇▇▇▇▇▇▇▇▇▇▇▇")
+		else:
+			print("\n找到重复标志的文件：")
+			WindowsColoredCommandLine.printColor(4,CHANGE_LIST_A)
+		if CHANGE_LIST_B == "":
+			WindowsColoredCommandLine.printColor(4,"▇▇▇▇▇▇▇▇▇▇▇▇本次没有找到大小一致的文件▇▇▇▇▇▇▇▇▇▇▇▇")
+		else:
+			print("\n找到大小一致的文件：")
+			WindowsColoredCommandLine.printColor(5,TEMP_CHANGE_LIST_B)
+		if (ERROR_REPORT == "") & (CSV_ERROR == ""):
+			WindowsColoredCommandLine.printColor(4,"▇▇▇▇▇▇▇▇▇▇▇▇程序正常运行，没有发现错误▇▇▇▇▇▇▇▇▇▇▇▇")
+		else:
+			print("\n错误日志：")
+			WindowsColoredCommandLine.printColor(6,TEMP_ERROR_REPORT)
+			print("\nCSV生成错误:"+CSV_ERROR)
+	else:
+		if CHANGE_LIST_A == "":
+			print("\033[1;32;41m{0}\033[0m".format("▇▇▇▇▇▇▇▇▇▇▇▇没有找到带有重复标志的文件▇▇▇▇▇▇▇▇▇▇▇▇"))
+		else:
+			print("\n找到重复标志的文件：")
+			print("\033[1;32;41m{0}\033[0m".format(TEMP_CHANGE_LIST_A))
+		if CHANGE_LIST_B == "":
+			print("\033[1;32;41m{0}\033[0m".format("▇▇▇▇▇▇▇▇▇▇▇▇本次没有找到大小一致的文件▇▇▇▇▇▇▇▇▇▇▇▇"))
+		else:
+			print("\n找到大小一致的文件：")
+			print("\033[1;33;41m{0}\033[0m".format(TEMP_CHANGE_LIST_B))
+		if (ERROR_REPORT == "") & (CSV_ERROR == ""):
+			print("\033[1;32;41m{0}\033[0m".format("▇▇▇▇▇▇▇▇▇▇▇▇程序正常运行，没有发现错误▇▇▇▇▇▇▇▇▇▇▇▇"))
+		else:
+			print("\n错误日志：")
+			print("\033[1;31;41m{0}\033[0m".format(TEMP_ERROR_REPORT))
+			print("\nCSV生成错误:"+CSV_ERROR)
