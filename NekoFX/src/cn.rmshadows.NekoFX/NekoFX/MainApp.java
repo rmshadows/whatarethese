@@ -90,12 +90,9 @@ public class MainApp extends Application {
 			} else {
 				System.out.println("系统托盘不支持");
 			}
-		}catch(
-
-	Exception e)
-	{
-		e.printStackTrace();
-	}
+		}catch(	Exception e){
+	            e.printStackTrace();
+	    }
 	}
 
 	public static void main(String[] args) {
