@@ -1,7 +1,7 @@
 #!/bin/bash
 #### 用于创建Python VENV（仅用于我自己的Python项目）
 # 虚拟环境文件夹名称
-venv_libs_dir="VENV"
+venv_libs_dir="ENV"
 # 创建的激活文件名
 act="activate"
 
