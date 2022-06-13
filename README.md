@@ -13,6 +13,7 @@
 |[NekoFX](https://gitee.com/rmshadows/shenmedongxi/attach_files/420915/download)|Java|Windows|v1.0|很无聊的小东西，测试系统托盘罢了。作用就是运行[Neko](http://www.randelshofer.ch/blog/2010/07/screenmate-neko-in-java/)和[eSheep](https://github.com/Adrianotiger/desktopPet)，仅此而已。|
 |字母倒置脚本|Java|All|v1.0|比如：‘Hello’变成‘oןןǝH’|
 |MyPythonVENV|Python|Linux|v1.0|我的Python项目虚拟环境搭建|
+|PythonMkdocs|Bash|Linux|v1.0|Mkdocs生成Python项目文档|
 
 
 ### 项目收集
@@ -21,8 +22,15 @@
 
 ### Update
 
+- 2022.06.13
+  - 更新了`PythonMkdocs`
 - 2022.03.16
   - 更新了`MyPythonVENV`
 
+### Other
+
+仓库地址：[Github](https://github.com/rmshadows/whatarethese)  |  [Gitee](https://gitee.com/rmshadows/shenmedongxi)
+
 ### 许可
+
 [LICENSE](https://gitee.com/rmshadows/shenmedongxi/blob/master/LICENSE)
