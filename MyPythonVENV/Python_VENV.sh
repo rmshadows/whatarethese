@@ -59,6 +59,14 @@ genAct(){
     fi
 }
 
+# 检查python3-venv是否安装
+if ! [ -x "$(command -v python3-venv)" ]; then
+    prompt -i 'Error: python3-venv is not installed.' >&2
+    prompt -x "安装python3-venv"
+    sudo apt install python3-venv
+fi
+
+
 # 首先检查有没有venv文件夹
 if [ -d "$venv_libs_dir" ];then
     if ! [ -f "$venv_libs_dir/bin/activate" ];then

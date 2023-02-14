@@ -22,6 +22,8 @@
 
 ### Update
 
+- 2023.02.04
+  - 优化了`MyPythonVENV`
 - 2022.06.13
   - 更新了`PythonMkdocs`
 - 2022.03.16
