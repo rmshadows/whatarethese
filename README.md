@@ -29,7 +29,7 @@
 
 ### Other
 
-仓库地址：[Github](https://github.com/rmshadows/whatarethese)  |  [Gitee](https://gitee.com/rmshadows/shenmedongxi)
+仓库地址：[Github](https://github.com/rmshadows/whatarethese)  | [Gitee](https://gitee.com/rmshadows/whatarethese) | [Gitee(旧版本Release在这里)](https://gitee.com/rmshadows/shenmedongxi) - 停更
 
 ### 许可
 
