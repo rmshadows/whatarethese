@@ -14,6 +14,7 @@
 |字母倒置脚本|Java|All|v1.0|比如：‘Hello’变成‘oןןǝH’|
 |MyPythonVENV|Python|Linux|v1.0|我的Python项目虚拟环境搭建|
 |PythonMkdocs|Bash|Linux|v1.0|Mkdocs生成Python项目文档|
+|Python通讯录整理工具|Python|All|v1.0|使用Python整理通讯录|
 
 
 ### 项目收集
@@ -21,6 +22,9 @@
 - 暂无内容
 
 ### Update
+
+- 2024.06.04
+  - 新增Python通讯录整理工具
 
 - 2023.02.04
   - 优化了`MyPythonVENV`
