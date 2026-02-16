@@ -1,9 +1,11 @@
 # VCF 通讯录整理工具
 
+https://github.com/FossifyOrg/Contacts
+
 ## 文件列表
 
-- `1-vcf_to_csv.py`——vcf转csv
-- `2-csv_to_vcf.py`——csv转vcf
+- `1-vcf_to_csv.py`——vcf转csv（`1.vcf` ——> `output.csv`）
+- `2-csv_to_vcf.py`——csv转vcf（`Contacts.csv` ——> `output.vcf`）
 - `m_VCF3.py`——VCF模块
 
 ## 使用

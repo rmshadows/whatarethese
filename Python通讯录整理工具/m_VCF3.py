@@ -42,7 +42,7 @@ def readVCF(vcf_file, validate=False, ignoreUnreadable=False, verbose=False):
         fieldnames: 所有唯一的字段名集合
     """
     vcards = []
-    with open(vcf_file, 'r') as f:
+    with open(vcf_file, 'r', encoding='utf-8', errors='replace') as f:
         for vcard in vobject.base.readComponents(f, validate=validate, ignoreUnreadable=ignoreUnreadable):
             vcards.append(vcard)
             if verbose:
@@ -175,22 +175,20 @@ def csv_to_vcards(csv_file, delimiter=','):
                         continue
                     # 处理主要字段
                     if key == 'adr':
-                        # 分割地址字段的各个部分
+                        # 多个地址用 ☀ 分隔，每个地址内用 ⭐ 分隔 7 项
                         values = value.split('☀')
-                        for v in range(0, len(values)):
-                            if values[v] == "None":
-                                values[v] = ""
-                        for adr in values:
-                            adr_param = adr.split('⭐')
-                            for v in range(0, len(adr_param)):
-                                if adr_param[v] == "None":
-                                    adr_param[v] = ""
-                        adr = Address(
-                            street=adr_param[0], city=adr_param[1], region=adr_param[2],
-                            code=adr_param[3], country=adr_param[4], box=adr_param[5],
-                            extended=adr_param[6]
-                        )
-                        vcard.add(key).value = adr
+                        for adr_str in values:
+                            if adr_str == "None":
+                                adr_str = ""
+                            adr_param = [p if p != "None" else "" for p in adr_str.split('⭐')]
+                            while len(adr_param) < 7:
+                                adr_param.append("")
+                            adr = Address(
+                                street=adr_param[0], city=adr_param[1], region=adr_param[2],
+                                code=adr_param[3], country=adr_param[4], box=adr_param[5],
+                                extended=adr_param[6]
+                            )
+                            vcard.add(key).value = adr
                     elif key == 'n':
                         # 分割姓名字段的各个部分
                         values = value.split('☀')
@@ -233,16 +231,15 @@ def vcards_to_vcf(vcards, vcf_file, Escaping=False):
     """
     with open(vcf_file, 'w', encoding='utf-8') as file:
         for vcard in vcards:
-            # 替换被转义的分号
             serialized_vcard = vcard.serialize()
-            print(serialized_vcard)
             if not Escaping:
                 serialized_vcard = serialized_vcard.replace(r'\;', ';')
                 serialized_vcard = serialized_vcard.replace('\r\n ', '')
                 serialized_vcard = serialized_vcard.replace('\n ', '')
                 serialized_vcard = serialized_vcard.replace('\r ', '')
-            file.write(serialized_vcard)  # 将 vCard 对象序列化为字符串并写入文件
-            file.write("\n")  # 每个 vCard 对象之间添加一个换行
+            file.write(serialized_vcard)
+            file.write("\n")
+    print(f"已写入 {vcf_file}，共 {len(vcards)} 条")
 
 
 def quoted_printable_to_utf8(quoted_printable_string):
